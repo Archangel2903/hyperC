@@ -94,3 +94,11 @@
   font-size: 2.5rem;
   font-weight: $font-weight-normal;
 }
+
+.navbar-collapse {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+}
