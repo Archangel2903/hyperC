@@ -7,4 +7,50 @@ footer.footer {
   position: relative;
 }
 
-.copyright {}
+.footer-content {
+  padding: 70px 0 50px;
+
+  &__text {
+    color: $gray-700;
+    line-height: 25px;
+  }
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+    margin: 0;
+    padding: 0;
+
+    li {
+      font-size: 21px;
+      line-height: 45px;
+    }
+  }
+
+  &__social {
+    &-link {
+      opacity: .6;
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.copyright {
+  margin: 0;
+  padding: 16px 0;
+  color: $white;
+  font-size: 15px;
+  text-align: center;
+  background: $primary;
+}

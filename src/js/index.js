@@ -8,7 +8,6 @@ import 'popper.js';
 import Swiper from 'swiper/dist/js/swiper.min';
 import noUiSlider from 'nouislider';
 
-
 $(window).on('load', function () {
     let b = $('body');
 
@@ -22,10 +21,76 @@ $(window).on('load', function () {
 });
 
 $(function () {
+    // Burger button
+    $('.burger-btn').on('click', function (e) {
+        e.stopPropagation();
+        $('body').toggleClass('open-menu');
+        $('.burger-btn').toggleClass('active');
+        $('#main_nav').toggleClass('active');
+    });
+
+    // document click
+    $('#main_nav').on('click', function (e) {
+        e.stopPropagation();
+    });
+    $(document).on('click', function (e) {
+        $('body').removeClass('open-menu');
+        $('.burger-btn').removeClass('active');
+        $('#main_nav').removeClass('active');
+    });
+
+
+    // map reviews
+    function mapReviews() {
+        let message = $('.reviews__box');
+        let dot = $('.reviews__dotted');
+
+        dot.on('click', function (e) {
+            let msgText = message.find('.reviews__text');
+            let authorPic = message.find('.reviews__author-photo img');
+            let authorName = message.find('.reviews__author-name');
+            let authorText = message.find('.reviews__author-text');
+
+            let data = {
+                'msg': $(this).data('text'),
+                'img': $(this).data('img'),
+                'name': $(this).data('author-name'),
+                'text': $(this).data('author-text')
+            }
+
+            if ($(this).hasClass('active')) {
+                $(this).removeClass('active');
+                message.toggleClass('active');
+            }
+            else {
+                dot.removeClass('active');
+                $(this).toggleClass('active');
+                message.addClass('active');
+            }
+
+            msgText.text(data.msg);
+            authorPic.attr('src', data.img);
+            authorName.text(data.name);
+            authorText.text(data.text);
+        });
+
+        dot.each(function (i, elem) {
+            $(elem).animate({
+                top: elem.dataset.y + '%',
+                left: elem.dataset.x + '%',
+            }, 1500, function () {
+                dot.removeClass('hide');
+            });
+        });
+    }
+
+    mapReviews();
+
+
     // Swiper slider
     if ($('.swiper-container').length) {
-        let slider;
-        let slide = document.querySelectorAll('.swiper-container .swiper-slide').length;
+        let slider,
+            slide = document.querySelectorAll('.swiper-container .swiper-slide').length;
 
         if (slide > 1) {
             slider = new Swiper('.swiper-container', {
@@ -39,10 +104,10 @@ $(function () {
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev'
                 },
-                pagination: {
+                /*pagination: {
                     el: '.swiper-pagination',
                     clickable: true
-                },
+                },*/
                 /*scrollbar: {
                     el: '.swiper-scrollbar',
                 },*/
@@ -100,6 +165,23 @@ $(function () {
         }
     }
 
+    // Lazy load counters
+    const counters = document.querySelectorAll('.statistic__counter');
+    let countObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting === true && entry.target.hasAttribute('data-count')) {
+                let current = entry.target;
+                animationNum(current, 3000);
+                current.removeAttribute('data-count');
+            }
+        });
+    });
+    if (counters.length > 0) {
+        counters.forEach(function (counter) {
+            countObserver.observe(counter)
+        });
+    }
+
     // Lazy load observer
     const imagesAll = document.querySelectorAll('img[data-src]');
     let imgObserve = new IntersectionObserver(function (entries) {
@@ -119,3 +201,23 @@ $(function () {
         });
     }
 });
+
+function animationNum(elem, time) {
+    let num = Number(elem.dataset.count);
+    let step = 1;
+    let n = 0;
+    let t = Math.round(time / (num / step));
+
+    if (num > 0) {
+        let interval = setInterval(function () {
+            n += step;
+            if (n === num) {
+                clearInterval(interval);
+            }
+            elem.innerHTML = n;
+        }, t);
+    }
+    else {
+        elem.innerHTML = n;
+    }
+}

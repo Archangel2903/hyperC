@@ -7,5 +7,131 @@ header.header {
   position: relative;
   min-width: 320px;
   width: 100%;
+  padding: 44px 0 0;
   z-index: 100;
+}
+
+.header-content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+
+  .logo {
+    margin: 0 auto;
+
+    img {
+      width: 75px;
+    }
+  }
+
+  &__menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    padding: 0 20px;
+    background: radial-gradient(83.15% 154.4% at 10% 13.52%, #141414 0%, #232441 56.38%, #292A2D 100%);
+    @include transition($transition-base);
+    transition-delay: 0s;
+
+    &-head {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      align-content: center;
+      align-items: center;
+      padding: 14px 0;
+
+      .logo {
+        margin: 0;
+      }
+
+      .burger-btn {
+        position: relative;
+      }
+    }
+
+    &-list {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      align-content: flex-start;
+      align-items: flex-start;
+      margin: 0;
+      padding: 0;
+    }
+    &-link {
+      width: 100%;
+      border-top: 1px solid $white;
+      padding: 16px 0;
+      color: $white;
+      text-transform: uppercase;
+    }
+
+    &.active {
+      left: 0;
+      transition-delay: .3s;
+    }
+  }
+}
+
+.burger-btn {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: none;
+  padding: 2px 0 0;
+  background: none;
+
+  &__line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: $white;
+    transform: translateY(-50%);
+    @include transition($transition-base);
+  }
+  &:before {
+    content: '';
+    @extend .burger-btn__line;
+    top: 0;
+    transform: translateY(0);
+  }
+  &:after {
+    content: '';
+    @extend .burger-btn__line;
+    top: auto;
+    bottom: 0;
+    transform: translateY(0);
+  }
+
+  &.active {
+    .burger-btn__line {
+      opacity: 0;
+      visibility: hidden;
+      filter: blur(10px);
+    }
+
+    &:before {
+      top: 50%;
+      bottom: auto;
+      transform: translateY(-50%) rotate(225deg);
+    }
+
+    &:after {
+      top: 50%;
+      bottom: auto;
+      transform: translateY(-50%) rotate(315deg);
+    }
+  }
 }

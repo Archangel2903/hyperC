@@ -64,41 +64,61 @@
 
 .section {
   position: relative;
-}
-
-.section-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-
-  &:after {
-    content: '';
-    @extend .section-bg;
-    opacity: .25;
-    //background: $main-first-color-custom;
-    z-index: 0;
-  }
-
-  &__img {
+  &-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: center;
+    z-index: -1;
+
+    &:after {
+      content: '';
+      @extend .section-bg;
+      opacity: .25;
+      //background: $main-first-color-custom;
+      z-index: 0;
+    }
+
+    &__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  &-title {
+    color: $gray-900;
+    font-size: 40px;
+    font-weight: 700;
   }
 }
 
-.title {
-  font-size: 2.5rem;
-  font-weight: $font-weight-normal;
+.btn {
+  padding: 16px 32px;
+  font-weight: 700;
+
+  &-lg {
+    padding-right: 40px;
+    padding-left: 40px;
+    font-size: inherit;
+    line-height: inherit;
+  }
+
+  &-light {
+    color: $primary;
+  }
 }
 
-.navbar-collapse {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%;
-  height: 100%;
+.form-control {
+  padding: 7px 0 !important;
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 0;
+}
+
+.text-pre-line {
+  white-space: pre-line;
 }

@@ -3,9 +3,156 @@
 *************************************************/
 // min-width
 @media screen and (min-width: 320px) {}
-@include media-breakpoint-up(sm) {}
-@include media-breakpoint-up(md) {}
-@include media-breakpoint-up(lg) {}
+@include media-breakpoint-up(sm) {
+  .section-title {
+    font-size: 46px;
+  }
+
+  .header-content {
+    &__menu {
+      width: 75%;
+    }
+  }
+}
+@include media-breakpoint-up(md) {
+  .header-content {
+    &__menu {
+      width: 50%;
+    }
+  }
+
+  .benefits-info {
+  }
+}
+@include media-breakpoint-up(lg) {
+  .open-menu {
+    overflow: auto;
+
+    .content {
+      opacity: 1;
+      transition-delay: 0s;
+    }
+  }
+
+//  header
+  .header-content {
+    .logo {
+      margin-right: 90px;
+
+      img {
+        width: auto;
+      }
+    }
+
+    &__menu {
+      position: static;
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      align-content: center;
+      width: auto;
+      height: auto;
+      padding: 0;
+      background: none;
+
+      &-list {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: center;
+      }
+
+      /*&-item {
+        &:not(:last-child) {
+          margin-right: 40px;
+        }
+      }*/
+
+      &-link {
+        width: auto;
+        border: none;
+        padding: 0;
+        opacity: .6;
+        text-transform: none;
+        &:not(:last-child) {
+          margin-right: 40px;
+        }
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .burger-btn {
+    position: relative;
+    display: none;
+  }
+
+//  content
+  .statistic {
+    display: flex;
+  }
+
+  .section-head {
+    padding: 213px 0 100px;
+  }
+
+  .head-content {
+    .main-title {
+      margin-bottom: 16px;
+      font-size: 55px;
+    }
+    &__subtitle {
+      margin-bottom: 33px;
+      font-size: 27px;
+    }
+    &__text {
+      font-size: 21px;
+    }
+  }
+
+  .section-service {
+    margin: 0 0 100px;
+    padding: 100px 0 0;
+  }
+
+  .service {
+    &__pic {
+      img {
+        margin: 0;
+      }
+    }
+  }
+
+  .section-benefits {
+    margin-bottom: 100px;
+  }
+
+  .subscribe {
+    padding: 38px 75px 88px;
+  }
+
+//  footer
+  .footer-content {
+    padding: 60px 0 130px;
+
+    &__nav {
+      align-content: space-around;
+      max-height: 160px;
+
+      li {
+        font-size: 15px;
+      }
+    }
+  }
+}
 @include media-breakpoint-up(xl) {}
 
 // max-width
