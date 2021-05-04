@@ -1,12 +1,11 @@
 import '../scss/main.scss';
 import 'intersection-observer';
 import $ from 'jquery';
-import 'jquery-ui'
-import 'jquery-ui/ui/effect'
 import 'bootstrap';
 import 'popper.js';
 import Swiper from 'swiper/dist/js/swiper.min';
-import noUiSlider from 'nouislider';
+import L from 'leaflet';
+import '../img/point.svg';
 
 $(window).on('load', function () {
     let b = $('body');
@@ -18,6 +17,29 @@ $(window).on('load', function () {
     }
 
     b.removeClass('loaded');
+
+    //leaflet map
+    if ($('#map').length) {
+        delete L.Icon.Default.prototype._getIconUrl;
+        L.Icon.Default.mergeOptions({
+            iconRetinaUrl: '../img/point.svg',
+            iconUrl: 'img/point.svg',
+            iconSize: 38,
+            iconAnchor: [19, 37],
+            shadowUrl: null,
+        });
+        const map = L.map('map');
+        const defaultCenter = [37.4201961,-122.1433409];
+        const basemap = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+            zoom: 17,
+            subdomains:['mt0','mt1','mt2','mt3']
+        });
+        let marker = L.marker(defaultCenter).addTo(map);
+        basemap.addTo(map);
+        if (map) {
+            map.setView(defaultCenter, 14.5).scrollWheelZoom.disable();
+        }
+    }
 });
 
 $(function () {
@@ -37,8 +59,8 @@ $(function () {
         $('body').removeClass('open-menu');
         $('.burger-btn').removeClass('active');
         $('#main_nav').removeClass('active');
+        $('.reviews__box, .reviews__dotted').removeClass('active');
     });
-
 
     // map reviews
     function mapReviews() {
@@ -46,6 +68,7 @@ $(function () {
         let dot = $('.reviews__dotted');
 
         dot.on('click', function (e) {
+            e.stopPropagation();
             let msgText = message.find('.reviews__text');
             let authorPic = message.find('.reviews__author-photo img');
             let authorName = message.find('.reviews__author-name');
@@ -83,9 +106,7 @@ $(function () {
             });
         });
     }
-
     mapReviews();
-
 
     // Swiper slider
     if ($('.swiper-container').length) {
@@ -116,53 +137,22 @@ $(function () {
         }
     }
 
-    // Range slide
-    if ($('input[type="range"]')) {
-        let sliderRange = document.querySelectorAll('.slider-range');
-        let sliderHandles = document.querySelectorAll('.slider-handles');
+    // Pseudo placeholder
+    if ($('form.feedback').length) {
+        $('form.feedback input').on('focus', function () {
+            $(this).prev().addClass('active');
+        });
 
-        if (sliderRange.length) {
-            sliderRange.forEach(function (elem) {
-                let input = elem.childNodes[0];
-                let startValue = input.hasAttribute('value') ? Number(input.getAttribute('value')) : 1;
-                let minValue = input.hasAttribute('min') ? Number(input.getAttribute('min')) : 1;
-                let maxValue = input.hasAttribute('max') ? Number(input.getAttribute('max')) : 100;
+        $('form.feedback input').on('input change blur', function () {
+            $(this).prev().addClass('active');
 
-                input.remove();
-
-                noUiSlider.create(elem, {
-                    start: [startValue],
-                    step: 1,
-                    behavior: 'tap',
-                    connect: [true, false],
-                    range: {
-                        'min': [minValue],
-                        'max': [maxValue]
-                    }
-                });
-            });
-        }
-
-        if (sliderHandles.length) {
-            sliderHandles.forEach(function (elem) {
-                let input = elem.childNodes[0];
-                let minValue = input.hasAttribute('min') ? Number(input.getAttribute('min')) : 1;
-                let maxValue = input.hasAttribute('max') ? Number(input.getAttribute('max')) : 100;
-
-                input.remove();
-
-                noUiSlider.create(elem, {
-                    start: [minValue, maxValue/2],
-                    step: 1,
-                    behavior: 'tap-drag',
-                    connect: true,
-                    range: {
-                        'min': minValue,
-                        'max': maxValue
-                    }
-                });
-            });
-        }
+            if ($(this).val() !== '') {
+                $(this).prev().addClass('active');
+            }
+            else {
+                $(this).prev().removeClass('active');
+            }
+        });
     }
 
     // Lazy load counters

@@ -37,8 +37,7 @@
     "bootstrap": "^4.5.2",
     "intersection-observer": "^0.7.0",
     "jquery": "^3.5.1",
-    "jquery-ui": "^1.12.1",
-    "nouislider": "^14.6.2",
+    "leaflet": "^1.7.1",
     "popper.js": "^1.16.1",
     "svg-spritemap-webpack-plugin": "^3.5.9",
     "swiper": "^4.5.1"
