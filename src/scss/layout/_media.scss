@@ -5,6 +5,7 @@
 @media screen and (min-width: 320px) {}
 @include media-breakpoint-up(sm) {
   .main-title {
+    font-size: 48px;
     &.decorate {
       &::before,
       &::after {
@@ -44,6 +45,31 @@
   }
 }
 @include media-breakpoint-up(md) {
+  #to-top {
+    position: fixed;
+    right: 39px;
+    bottom: 56px;
+    display: block;
+    width: 70px;
+    height: 70px;
+    border: none;
+    border-radius: 3px;
+    background: #5fbe3f;
+    font-size: 0;
+    transform: scale(0);
+    z-index: 100;
+
+    svg {
+      width: 16px;
+      height: 16px;
+      transform: rotate(-90deg);
+    }
+
+    &.show {
+      transform: scale(1);
+    }
+  }
+
   .header-content {
     &__menu {
       width: 50%;
@@ -77,6 +103,12 @@
 
     &__box {
       justify-content: center;
+    }
+  }
+
+  .cases {
+    &__wrap {
+      margin: 0 0 88px;
     }
   }
 }
@@ -138,7 +170,7 @@
         opacity: .6;
         text-transform: none;
         &:not(:last-child) {
-          margin-right: 40px;
+          margin-right: 16px;
         }
 
         &::after {
@@ -226,6 +258,14 @@
     padding-top: 110px;
   }
 
+  .section-cases {
+    padding: 150px 0 100px;
+  }
+
+  .section-login {
+    padding: 175px 0 100px;
+  }
+
 //  footer
   .footer-content {
     &__nav {
@@ -241,6 +281,15 @@
   }
 }
 @include media-breakpoint-up(xl) {
+  .header-content {
+    &__menu-link {
+      &:not(:last-child) {
+        margin-right: 40px;
+      }
+    }
+  }
+
+  // content
   .advantages-info {
     &__pic {
       img {

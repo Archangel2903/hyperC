@@ -29,7 +29,7 @@
 .main-title {
   position: relative;
   margin-bottom: 12px;
-  font-size: 48px;
+  font-size: 36px;
   font-weight: 700;
 }
 
@@ -149,15 +149,12 @@
 
 .benefits-info {
   max-width: 390px;
-  margin: 0 auto;
+  margin: 0 auto 20px;
   border: 1px solid #E5E8ED;
   border-radius: 4px;
   padding: 40px 10px;
   text-align: center;
   @include transition($transition-base);
-  &:not(:last-child) {
-    margin: 0 auto 20px;
-  }
   &:hover {
     box-shadow: 0px 80px 80px -20px rgba(154, 156, 165, 0.08), 0px 30px 24px -10px rgba(154, 156, 165, 0.05), 0px 12px 10px -6px rgba(154, 156, 165, 0.04), 0px 4px 4px -4px rgba(30, 33, 44, 0.03);
   }
@@ -645,5 +642,232 @@
       font-size: 14px;
       font-weight: 400;
     }
+  }
+}
+
+.section-cases {
+  padding: 80px 0 30px;
+}
+
+.cases {
+  &__wrap {
+    margin: 0 0 50px;
+  }
+
+  .card {
+    max-width: 370px;
+    height: 100%;
+    margin: 0 auto;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0px 12px 24px rgba(0, 0, 0, .12);
+    overflow: hidden;
+
+    &-img {
+      &-top {
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+
+    &-body {
+      padding: 20px 24px;
+    }
+
+    &-title {
+      margin-bottom: 8px;
+      color: #3B3B3B;
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 30px;
+
+      a {
+        color: #3B3B3B;
+      }
+    }
+
+    &-text {
+      margin: 0;
+      color: #494949;
+      line-height: 28px;
+    }
+  }
+}
+
+.section-case {
+  padding: 46px 0 150px;
+}
+
+.sidebar {
+  width: 100%;
+  max-width: 390px;
+
+  &__box {
+    padding: 28px 30px;
+    border-radius: 8px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, .12);
+    background: $white;
+    &:not(:last-child) {
+      margin: 0 0 50px;
+    }
+
+    &-title {
+      margin: 0 0 16px;
+      color: #0d263b;
+      font-size: 22px;
+      font-weight: bold;
+      line-height: 30px;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: stretch;
+    align-items: stretch;
+    margin: 0;
+    padding: 0;
+
+    &-item {
+      &:not(:last-child) {
+        margin: 0 0 24px;
+      }
+    }
+
+    &-link {
+      display: block;
+      border: 1px solid #D5D5D6;
+      border-radius: 10px;
+      padding: 17px 30px;
+      color: $gray-700;
+      line-height: 26px;
+
+      &:hover {
+        border-color: $primary;
+        color: $white;
+        background: $primary;
+      }
+
+      &.active {
+        border-color: $primary;
+        color: $white;
+        background: $primary;
+      }
+    }
+  }
+}
+
+.case-content {
+  &__pic {
+    display: block;
+    margin: 0 0 50px;
+
+    img {
+      width: 100%;
+      -webkit-border-radius: 12px;
+      -moz-border-radius: 12px;
+      border-radius: 12px;
+      object-fit: cover;
+      object-position: center;
+      overflow: hidden;
+    }
+  }
+
+  &__title {
+    margin: 0 0 12px;
+    color: #0d263b;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 40px;
+    text-align: center;
+  }
+
+  &__box {
+    max-width: 730px;
+    &:not(:last-child) {
+      margin-bottom: 16px;
+    }
+
+    &-name {
+      margin-bottom: 4px;
+      color: #0d263b;
+      font-size: 18px;
+      font-weight: bold;
+      line-height: 32px;
+    }
+
+    &-text {
+      margin: 0;
+      color: $gray-700;
+      font-size: 17px;
+      line-height: 32px;
+    }
+  }
+}
+
+.section-login {
+  padding: 80px 0;
+}
+
+.login {
+  &__form {
+    max-width: 490px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    margin-bottom: 12px;
+    color: $gray-900;
+    font-size: 46px;
+    font-weight: bold;
+    line-height: 60px;
+  }
+
+  &__subtitle {
+    margin-bottom: 30px;
+    color: $gray-700;
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  &__group {
+    margin: 0 0 18px;
+
+    &:not(:last-of-type) {
+      margin-bottom: 35px;
+    }
+  }
+
+  &__placeholder {
+    display: inline-block;
+    margin-bottom: 10px;
+    color: $gray-800;
+    font-size: 18px;
+  }
+
+  &__input {
+    &.form-control {
+      border: 1px solid $gray-400;
+      border-radius: 4px;
+      padding: 13px 16px !important;
+      background: $gray-200;
+    }
+  }
+
+  &__link {
+    color: $gray-700;
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .form-group {
+    display: block;
+  }
+
+  .btn {
+
   }
 }

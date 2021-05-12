@@ -40,9 +40,23 @@ $(window).on('load', function () {
             map.setView(defaultCenter, 14.5).scrollWheelZoom.disable();
         }
     }
+
+    btnToTop();
+});
+
+$(window).on('scroll', function () {
+    btnToTop();
 });
 
 $(function () {
+    $('#to-top').on('click', function () {
+        let doc = $('html, body');
+
+        doc.stop().animate({
+            scrollTop: 0
+        }, '700');
+    });
+
     // Burger button
     $('.burger-btn').on('click', function (e) {
         e.stopPropagation();
@@ -191,6 +205,15 @@ $(function () {
         });
     }
 });
+
+function btnToTop() {
+    if (window.scrollY >= 1000) {
+        $('#to-top').addClass('show');
+    }
+    else {
+        $('#to-top').removeClass('show');
+    }
+}
 
 function animationNum(elem, time) {
     let num = Number(elem.dataset.count);
